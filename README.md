@@ -29,3 +29,7 @@ This project used an experiment of using Watson Discovery continually crawls int
 
 This project experimented with cognitical solution that can deliver immediate insight with great precision and a remarkable level of detail. It offers qualitative data about people’s opinions and feelings. The solution processes huge amounts of structured and unstructured data. The process is automated, so it’s fast. To compile a similar sentiment analysis report manually it would take approximately a week, and by that time, the data would be old. Cognitical include solutions that evaluate sarcasm, satire and emotion.
 
+The node red code is available at:
+https://eu-gb.git.cloud.ibm.com/160417733004/NodeREDAJAHK.git
+
+
