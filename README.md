@@ -34,10 +34,8 @@ This project includes a bot it is the same as a regular app: it can access the s
 The bot can send DMs, it can be mentioned by users, it can post messages or upload files, and it can be invited to channels - or kicked out. Since bot is capable of doing everything that a Slack App can do, we're going to limit our focus to a common use-case for bots.
 
 
-
-
-
 The node red code is available at:
 https://eu-gb.git.cloud.ibm.com/160417733004/NodeREDAJAHK.git
+The snapshot of flow of the app is provided in the repository as UI_flow.PNG
 
 
