@@ -1,5 +1,9 @@
 Hello everyone!
+
+
 I am Raesah Sheriff
+
+
 This contains the details of project that was launched by SmartBridge in association with AICTE.
 My project titled AI Powered News Search App is a Server Side Application made using Node-RED using the pre-built Watson Discovery News collection and Watson Discovery Service through the Discovery API. Optionally,I have also chosen to use a Slack interface to query the data, push news alerts out to web notification and deploy the app on IBM Cloud.
 
