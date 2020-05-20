@@ -36,6 +36,8 @@ The bot can send DMs, it can be mentioned by users, it can post messages or uplo
 
 The node red code is available at:
 https://eu-gb.git.cloud.ibm.com/160417733004/NodeREDAJAHK.git
+
+
 The snapshot of flow of the app is provided in the repository as UI_flow.PNG
 
 
