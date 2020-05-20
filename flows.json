@@ -1,0 +1,577 @@
+[
+    {
+        "id": "ea92efbc.14de6",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d768fca4.0a559",
+        "type": "ui_form",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "label": "",
+        "group": "8e635ee7.3ad3f",
+        "order": 3,
+        "width": "14",
+        "height": "4",
+        "options": [
+            {
+                "label": "Enter the input",
+                "value": "Input",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Input": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 50,
+        "y": 220,
+        "wires": [
+            [
+                "bc6b2a0e.559d28"
+            ]
+        ]
+    },
+    {
+        "id": "bc6b2a0e.559d28",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "func": "msg={\n    discoveryparams:\n{\n    \"environment_id\":\"system\",\n    \"query\":msg.payload.Input\n}\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "a25a6965.9dac98"
+            ]
+        ]
+    },
+    {
+        "id": "a25a6965.9dac98",
+        "type": "watson-discovery-v1",
+        "z": "ea92efbc.14de6",
+        "name": "discovery",
+        "environmentname": "",
+        "environmentId": "system",
+        "collectionId": "news-en",
+        "configurationname": "",
+        "configurationId": "",
+        "language_code": "en",
+        "collection_name": "",
+        "count": "1",
+        "passages": true,
+        "nlp_query": true,
+        "query": "",
+        "filter": "",
+        "aggregation": "",
+        "return": "",
+        "description": "",
+        "size": "LT",
+        "discovery-method": "query",
+        "service-endpoint": "https://api.eu-gb.discovery.watson.cloud.ibm.com/instances/c272e6df-b5bb-4d0a-b48d-b725166e8404",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "26b7dc2c.79c404",
+                "545eca6d.1eb714",
+                "b80d7682.e798b8",
+                "d6beb987.88eef8",
+                "7846ed7b.0dc614",
+                "f2f66803.794808",
+                "f8cf6f02.86e09"
+            ]
+        ]
+    },
+    {
+        "id": "26b7dc2c.79c404",
+        "type": "debug",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 320,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "545eca6d.1eb714",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "text",
+        "func": "msg.payload=msg.search_results.results[0].text\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 60,
+        "wires": [
+            [
+                "1245927a.75877e",
+                "f04fba0e.0d0ad8",
+                "4857ea68.77c464"
+            ]
+        ]
+    },
+    {
+        "id": "b80d7682.e798b8",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "author",
+        "func": "msg.payload=msg.search_results.results[0].author\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 140,
+        "wires": [
+            [
+                "efad34b0.4aa2d8"
+            ]
+        ]
+    },
+    {
+        "id": "d6beb987.88eef8",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "main page url",
+        "func": "msg.payload=msg.search_results.results[0].main_image_url\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "b49a35fd.d14898"
+            ]
+        ]
+    },
+    {
+        "id": "7846ed7b.0dc614",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "url",
+        "func": "msg.payload=msg.search_results.results[0].url\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "9e899708.3fb968"
+            ]
+        ]
+    },
+    {
+        "id": "f2f66803.794808",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "score",
+        "func": "msg.payload=msg.search_results.results[0].enriched_text.sentiment.document.score\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 260,
+        "wires": [
+            [
+                "59fe2cdd.bc5d14",
+                "2ca1e985.281d86",
+                "4857ea68.77c464"
+            ]
+        ]
+    },
+    {
+        "id": "f8cf6f02.86e09",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "label",
+        "func": "msg.payload=msg.search_results.results[0].enriched_text.sentiment.document.label\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "26bf0d6f.c48be2"
+            ]
+        ]
+    },
+    {
+        "id": "1245927a.75877e",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 4,
+        "width": "14",
+        "height": "4",
+        "name": "",
+        "label": "search result",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 770,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "efad34b0.4aa2d8",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 5,
+        "width": "14",
+        "height": "3",
+        "name": "",
+        "label": "author",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 750,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b49a35fd.d14898",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 6,
+        "width": "14",
+        "height": "3",
+        "name": "",
+        "label": "main page url",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 780,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9e899708.3fb968",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 7,
+        "width": "14",
+        "height": "3",
+        "name": "",
+        "label": "url",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 750,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "59fe2cdd.bc5d14",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 8,
+        "width": "14",
+        "height": "2",
+        "name": "",
+        "label": "score",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "26bf0d6f.c48be2",
+        "type": "ui_text",
+        "z": "ea92efbc.14de6",
+        "group": "8e635ee7.3ad3f",
+        "order": 9,
+        "width": "14",
+        "height": "2",
+        "name": "",
+        "label": "label",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2ca1e985.281d86",
+        "type": "ui_gauge",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "group": "8e635ee7.3ad3f",
+        "order": 10,
+        "width": "14",
+        "height": "4",
+        "gtype": "gage",
+        "title": "sentiment score",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-2",
+        "max": "2",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f04fba0e.0d0ad8",
+        "type": "debug",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 890,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4857ea68.77c464",
+        "type": "sentiment",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "property": "payload",
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "664460db.77f24",
+                "b336e5f0.09bed8",
+                "7daab5ee.609f4c",
+                "19e5bab9.5e5455"
+            ]
+        ]
+    },
+    {
+        "id": "664460db.77f24",
+        "type": "debug",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 360,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b336e5f0.09bed8",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "sentiment",
+        "func": "msg.payload=msg.sentiment.score.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 420,
+        "wires": [
+            [
+                "1dd485fc.546c5a"
+            ]
+        ]
+    },
+    {
+        "id": "7daab5ee.609f4c",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "positive",
+        "func": "msg.payload=msg.sentiment.positive.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 480,
+        "wires": [
+            [
+                "e842c018.546f2"
+            ]
+        ]
+    },
+    {
+        "id": "19e5bab9.5e5455",
+        "type": "function",
+        "z": "ea92efbc.14de6",
+        "name": "negative",
+        "func": "msg.payload=msg.sentiment.negative.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 540,
+        "wires": [
+            [
+                "75ea9b01.835d84"
+            ]
+        ]
+    },
+    {
+        "id": "1dd485fc.546c5a",
+        "type": "ui_chart",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "group": "8e635ee7.3ad3f",
+        "order": 11,
+        "width": "4",
+        "height": "6",
+        "label": "sentimental score",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-2.5",
+        "ymax": "2.5",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e842c018.546f2",
+        "type": "ui_chart",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "group": "8e635ee7.3ad3f",
+        "order": 12,
+        "width": "4",
+        "height": "6",
+        "label": "positive chart",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-2.5",
+        "ymax": "2.5",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75ea9b01.835d84",
+        "type": "ui_chart",
+        "z": "ea92efbc.14de6",
+        "name": "",
+        "group": "8e635ee7.3ad3f",
+        "order": 13,
+        "width": "4",
+        "height": "6",
+        "label": "negative chart",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-2.5",
+        "ymax": "2.5",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e635ee7.3ad3f",
+        "type": "ui_group",
+        "z": "",
+        "name": "IBM",
+        "tab": "a237f74.ffb3e08",
+        "order": 1,
+        "disp": true,
+        "width": "14",
+        "collapse": false
+    },
+    {
+        "id": "a237f74.ffb3e08",
+        "type": "ui_tab",
+        "z": "",
+        "name": "IBM",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
