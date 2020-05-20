@@ -11,7 +11,7 @@ The purpose of the project is to improve news fetching methodologies. The briefi
 
 This project includes a bot like a Slack App designed to interact with users via conversation but with a face,name and a personality that encourages users to converse.
 
-2.1 Existing problem
+Existing problem
 
 1)It is difficult to rely on search engines to index, sort and rank externally-produced content.
 
@@ -23,8 +23,7 @@ coming to the most important point, how true is the news
 
 4)It is difficult to get better quality news.
 
-
-All of these problems are overcomed by the use of Watson Discovery Service:
+Recommended solution through my app,All of these problems are overcomed by the use of Watson Discovery Service:
 
 This project used an experiment of using Watson Discovery continually crawls into the web to update its Discovery News collection to query news and display it to the user via UI and a slack bot. 
 
